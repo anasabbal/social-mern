@@ -1,6 +1,8 @@
-const create = async (user) => {
+const userService = {};
+
+userService.create = async (user) => {
     try {
-        let response = await fetch('/api/users/', {
+        let response = await fetch('http://localhost:3000/v1/api/users', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -14,7 +16,7 @@ const create = async (user) => {
     }
 }
 
-const list = async (signal) => {
+userService.list = async (signal) => {
     try {
         let response = await fetch('/api/users/', {
             method: 'GET',
@@ -25,7 +27,7 @@ const list = async (signal) => {
         console.log(err)
     }
 }
-const read = async (params, credentials, signal) => {
+userService.read = async (params, credentials, signal) => {
     try {
         let response = await fetch('/api/users/' + params.userId, {
             method: 'GET',
@@ -42,7 +44,7 @@ const read = async (params, credentials, signal) => {
     }
 }
 
-const update = async (params, credentials, user) => {
+userService.update = async (params, credentials, user) => {
     try {
         let response = await fetch('/api/users/' + params.userId, {
             method: 'PUT',
@@ -59,7 +61,7 @@ const update = async (params, credentials, user) => {
     }
 }
 
-const remove = async (params, credentials) => {
+userService.remove = async (params, credentials) => {
     try {
         let response = await fetch('/api/users/' + params.userId, {
             method: 'DELETE',
@@ -74,11 +76,4 @@ const remove = async (params, credentials) => {
         console.log(err)
     }
 }
-
-export {
-    create,
-    list,
-    read,
-    update,
-    remove
-}
+export default userService;
