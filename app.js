@@ -7,10 +7,14 @@ const databaseConfig = require("./config/key");
 const {mongoose} = require("mongoose");
 const userRoute = require('./routes/user-route');
 const authRoute = require('./routes/auth-route');
+const cors = require("cors");
 
 
 
 const app = express();
+
+// To prevent CORS errors
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

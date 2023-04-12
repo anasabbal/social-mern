@@ -3,6 +3,7 @@ import Menu from "./core/Menu"
 import Home from "./pages/Home"
 import Register from "./components/Register"
 import Login from './components/Login'
+import Profile from './components/Profile'
 
 
 const MainRoute = () => {
@@ -13,6 +14,7 @@ const MainRoute = () => {
                 <Route exact path="/" component={Home}/>
                 <Route path="/register" component={Register}/>
                 <Route path='/login' component={Login}/>
+                <Route path="/user/:userId" component={Profile}/>
             </Switch>
         </div>
     )

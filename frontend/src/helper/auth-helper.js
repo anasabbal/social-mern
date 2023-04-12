@@ -20,7 +20,7 @@ const auth = {
             sessionStorage.removeItem('jwt')
         cb()
         //optional
-        authService.logout().then((data) => {
+        authService.logout.then((data) => {
             document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
         })
     }

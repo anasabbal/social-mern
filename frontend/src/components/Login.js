@@ -1,6 +1,7 @@
 import { makeStyles} from '@mui/styles';
 import {useState} from "react";
 import theme from '../theme';
+import {Redirect} from 'react-router-dom';
 import { Card, 
     CardContent, 
     TextField, 
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
   });
 
 
-export default function Login(){
+export default function Login(props){
     const classes = useStyles()
     const [values, setValues] = useState({
         email: '',
@@ -62,10 +63,18 @@ export default function Login(){
                       setValues({ ...values, error: '',redirectToReferrer: true});
                     })
                     console.log(data);
-                    localStorage.setItem('token', data.token);
                   }
             })
             
+    }
+    const {from} = props.location.state || {
+        from: {
+          pathname: '/'
+        }
+    }
+    const {redirectToReferrer} = values
+    if (redirectToReferrer) {
+        return (<Redirect to={from}/>)
     }
 
     return (
