@@ -6,8 +6,6 @@ const authController = require("../controller/auth-controller");
 const router = express.Router();
 
 
-//Auth a user and generate a jwt
-
 router.route('/api/users')
     .get(userController.list)
     .post(userController.create_user)
