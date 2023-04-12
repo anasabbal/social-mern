@@ -2,7 +2,7 @@ const userService = {};
 
 userService.create = async (user) => {
     try {
-        let response = await fetch('http://localhost:3000/v1/api/users', {
+        let response = await fetch('http://localhost:3001/v1/api/users', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

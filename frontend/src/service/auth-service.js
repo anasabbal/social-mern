@@ -1,12 +1,13 @@
-const login = async (user) => {
+const authService = {};
+
+authService.login = async (user) => {
     try {
-        let response = await fetch('/auth/login/', {
+        let response = await fetch('http://localhost:3001/v1/api/auth/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            credentials: 'include',
             body: JSON.stringify(user)
         })
         return await response.json()
@@ -15,7 +16,7 @@ const login = async (user) => {
     }
 }
 
-const logout = async () => {
+authService.logout = async () => {
     try {
         let response = await fetch('/auth/logout/', { method: 'GET' })
         return await response.json()
@@ -24,7 +25,4 @@ const logout = async () => {
     }
 }
 
-export {
-    login,
-    logout
-}
+export default authService;

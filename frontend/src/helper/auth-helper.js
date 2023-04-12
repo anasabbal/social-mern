@@ -1,4 +1,4 @@
-import {logout} from "../service/auth-service";
+import authService from "../service/auth-service";
 
 const auth = {
     isAuthenticated() {
@@ -20,7 +20,7 @@ const auth = {
             sessionStorage.removeItem('jwt')
         cb()
         //optional
-        logout().then((data) => {
+        authService.logout().then((data) => {
             document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
         })
     }

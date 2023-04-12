@@ -1,13 +1,17 @@
-import { Route, Routes, Outlet } from "react-router";
-import './App.css';
-import Register from "./components/Register";
-import Home from "./pages/Home";
+import { BrowserRouter } from "react-router-dom";
+import theme from './theme';
+import { ThemeProvider } from "@mui/styles";
+import MainRoute from "./MainRoute";
+
+
 
 function App() {
   return (
-    <div>
-      <Home/>
-    </div>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <MainRoute/>
+        </ThemeProvider>
+      </BrowserRouter>
   );
 }
 

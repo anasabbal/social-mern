@@ -1,8 +1,8 @@
-import {createMuiTheme} from "@mui/material";
+import { createTheme } from '@mui/material';
 import {pink} from "@mui/material/colors";
 
 
-const theme = createMuiTheme({
+const theme = createTheme({
     typography: {
       useNextVariants: true,
     },

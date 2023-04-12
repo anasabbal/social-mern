@@ -1,4 +1,4 @@
-import { makeStyles, ThemeProvider} from '@mui/styles';
+import { makeStyles} from '@mui/styles';
 import {useState} from "react";
 import {
     Button,
@@ -7,12 +7,13 @@ import {
     CardContent,
     Dialog, DialogActions,
     DialogContent, DialogContentText,
-    DialogTitle, Link,
+    DialogTitle,
     TextField,
     Typography,Icon
 } from '@mui/material';
 import userService from "../service/user-service";
 import theme from '../theme';
+import {Link} from 'react-router-dom';
 
 
 
@@ -69,42 +70,40 @@ export default function Register (){
     };
 
     return (
-        <div>
-            <ThemeProvider className={theme}>
-            <Card className={classes.card}>
-        <CardContent>
-          <Typography variant="h6" className={classes.title}>
-            Sign Up
-          </Typography>
-          <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
-          <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
-          <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
-          <br/> {
-            values.error && (<Typography component="p" color="error">
-              <Icon color="error" className={classes.error}>error</Icon>
-              {values.error}</Typography>)
-          }
-        </CardContent>
-        <CardActions>
-          <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
-        </CardActions>
-      </Card>
-      <Dialog open={values.open} disableBackdropClick={true}>
-        <DialogTitle>New Account</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            New account successfully created.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Link to="/signin">
-            <Button color="primary" autoFocus="autoFocus" variant="contained">
-              Sign In
-            </Button>
-          </Link>
-        </DialogActions>
-      </Dialog>
-      </ThemeProvider>
-        </div>
+      <div>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography variant="h6" className={classes.title}>
+              Register
+            </Typography>
+            <TextField name="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
+            <TextField name="email" label="Email" type="email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/> <br/>
+            <TextField name="password" label="Password" type="password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/><br/>
+            {
+              values.error && (<Typography component="p" color="error">
+                <Icon color="error" className={classes.error}>error</Icon>
+              </Typography>)
+            }
+          </CardContent>
+          <CardActions>
+            <Button color="primary" variant="container" onClick={clickSubmit} className={classes.submit}>Submit</Button>
+          </CardActions>
+          <Dialog open={values.open} disableBackdropClick={true}>
+            <DialogTitle>New Account</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                New Account successfully created .
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Link to="/login">
+                <Button color="primary" autoFocus="autoFocus" variant="contained">
+                  Login
+                </Button>
+              </Link>
+            </DialogActions>
+          </Dialog>
+        </Card>
+      </div>
     )
 }
