@@ -14,17 +14,19 @@ router.route('/api/users')
     .post(userController.create_user)
 
 router.route('/api/users/:userId')
+    // GET
     .get(expressJwt.expressjwt({
         secret: "nkvjefaNJVDSJ",
         userProperty: 'auth',
         algorithms: ["HS256"]
     }), userController.read)
-
+    // UPDATE
     .put(expressJwt.expressjwt({
         secret: "nkvjefaNJVDSJ",
         userProperty: 'auth',
         algorithms: ["HS256"]
     }), authController.hasAuthorization, userController.updateUserById)
+    //
     .delete(expressJwt.expressjwt({
         secret: "nkvjefaNJVDSJ",
         userProperty: 'auth',

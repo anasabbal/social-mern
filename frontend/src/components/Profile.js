@@ -32,10 +32,7 @@ const userStyles = makeStyles({
 
 export default function Profile({match}) {
     const classes = userStyles();
-    const [user, setUser] = useState({
-        name: "",
-        email: ""
-    });
+    const [user, setUser] = useState({});
     const [redirectToSignIn, setRedirectToSignIn] = useState(false);
 
 
