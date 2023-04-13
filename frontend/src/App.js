@@ -8,9 +8,7 @@ import MainRoute from "./MainRoute";
 function App() {
   return (
       <BrowserRouter>
-        <ThemeProvider theme={theme}>
           <MainRoute/>
-        </ThemeProvider>
       </BrowserRouter>
   );
 }

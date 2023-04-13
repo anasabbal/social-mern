@@ -1,9 +1,12 @@
 const express = require("express");
-const userMiddleware = require("../middleware/user-middleware");
 const userController = require('../controller/user-controller');
 const authController = require("../controller/auth-controller");
+const expressJwt = require('express-jwt');
+
 
 const router = express.Router();
+
+
 
 
 router.route('/api/users')
@@ -11,9 +14,22 @@ router.route('/api/users')
     .post(userController.create_user)
 
 router.route('/api/users/:userId')
-    .get(authController.requireSignin, userController.read)
-    .put(authController.requireSignin, authController.hasAuthorization, userController.updateUserById)
-    .delete(authController.requireSignin, authController.hasAuthorization, userController.deleteUser)
+    .get(expressJwt.expressjwt({
+        secret: "nkvjefaNJVDSJ",
+        userProperty: 'auth',
+        algorithms: ["HS256"]
+    }), userController.read)
+
+    .put(expressJwt.expressjwt({
+        secret: "nkvjefaNJVDSJ",
+        userProperty: 'auth',
+        algorithms: ["HS256"]
+    }), authController.hasAuthorization, userController.updateUserById)
+    .delete(expressJwt.expressjwt({
+        secret: "nkvjefaNJVDSJ",
+        userProperty: 'auth',
+        algorithms: ["HS256"]
+    }), authController.hasAuthorization, userController.deleteUser)
 
 router.param('userId', userController.getUserById);
 

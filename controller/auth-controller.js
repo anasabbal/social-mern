@@ -53,12 +53,6 @@ const logout = (req, res) => {
         message: "Logout"
     });
 }
-const requireSignin = () => {
-    expressJwt({
-        secret: "nkvjefaNJVDSJ",
-        userProperty: 'auth'
-    });
-}
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth && req.profile._id === req.auth._id
@@ -72,5 +66,5 @@ const hasAuthorization = (req, res, next) => {
 
 
 module.exports = {
-    register, logout, requireSignin, hasAuthorization
+    register, logout, hasAuthorization
 };

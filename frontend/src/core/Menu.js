@@ -27,17 +27,9 @@ const isActive = (pathname, path) => {
               
             </IconButton>
           </Link>
-          <Link to="/users">
-            <Button style={isActive(pathname, "/users")}>Users</Button>
-          </Link>
-          {auth.isAuthenticated() ? (
-            <span>
-              <Link to={`/user/${auth.isAuthenticated().user._id}`}>
-                <Button style={isActive(pathname, `/user/${auth.isAuthenticated().user._id}`)}>My Profile</Button>
-              </Link>
-              <Button color="inherit" onClick={handleLogout}>Sign out</Button>
-            </span>
-          ) : (
+
+          {!auth.isAuthenticated() && (
+
             <span>
               <Link to="/register">
                 <Button style={isActive(pathname, "/register")}>Sign up</Button>
@@ -55,7 +47,7 @@ const isActive = (pathname, path) => {
                 <Button color="inherit" onClick={() => {
                     auth.clearJWT(() => history.push('/'))
                     }}>Sign out</Button>
-                 </span>
+                </span>
         )
       }
         </Toolbar>

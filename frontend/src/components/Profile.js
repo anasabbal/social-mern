@@ -1,5 +1,5 @@
 import { makeStyles} from '@mui/styles';
-import {useEffect, useState} from "react";
+import {useEffect, useState} from 'react';
 import theme from '../theme';
 import auth from './../helper/auth-helper';
 import userService from '../service/user-service';
@@ -19,22 +19,23 @@ import { Avatar,
 
 const userStyles = makeStyles({
     root: {
-        ...theme.mixins.gutters({
-            maxWidth: 600,
-            margin: 'auto',
-            padding: theme.spacing(3),
-            marginTop: theme.spacing(5)
-        }),
+        maxWidth: 600,
+        margin: 'auto',
+        padding: theme.spacing(3),
+        marginTop: theme.spacing(5)
     },
-      title: {
+    title: {
         marginTop: theme.spacing(3),
         color: theme.palette.protectedTitle
-      }
+    }
 });
 
 export default function Profile({match}) {
     const classes = userStyles();
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        name: "",
+        email: ""
+    });
     const [redirectToSignIn, setRedirectToSignIn] = useState(false);
 
 
@@ -49,12 +50,13 @@ export default function Profile({match}) {
             if (data && data.error) {
                 setRedirectToSignIn(true)
             } else {
-              setUser(data)
+                console.log(data);
+                setUser(data);
             }
           })
 
         return function cleanup(){
-          abortController.abort()
+          abortController.abort();
         }
       }, [match.params.userId])
 

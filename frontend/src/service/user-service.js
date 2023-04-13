@@ -10,6 +10,7 @@ userService.create = async (user) => {
             },
             body: JSON.stringify(user)
         })
+        console.log(response);
         return await response.json();
     }catch (err){
         console.log(err);
@@ -46,7 +47,7 @@ userService.read = async (params, credentials, signal) => {
 
 userService.update = async (params, credentials, user) => {
     try {
-        let response = await fetch('/api/users/' + params.userId, {
+        let response = await fetch('http://localhost:3001/v1/api/users/' + params.userId, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -63,7 +64,7 @@ userService.update = async (params, credentials, user) => {
 
 userService.remove = async (params, credentials) => {
     try {
-        let response = await fetch('/api/users/' + params.userId, {
+        let response = await fetch('http://localhost:3001/v1/api/users/' + params.userId, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',

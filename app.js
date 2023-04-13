@@ -48,10 +48,4 @@ app.use("/v1", userRoute);
 app.use("/v1", postRoute);
 
 
-// Handle errors
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({message: "An error occured"});
-})
-
 module.exports = app;

@@ -2,7 +2,6 @@
 
 
 export default function DeleteUser ({match}){
-    return (
-        <div></div>
-    );
+    //const [user, ]
+    return '';
 }
