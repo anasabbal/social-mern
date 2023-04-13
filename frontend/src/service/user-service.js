@@ -18,7 +18,7 @@ userService.create = async (user) => {
 
 userService.list = async (signal) => {
     try {
-        let response = await fetch('/api/users/', {
+        let response = await fetch('http://localhost:3001/v1/api/users', {
             method: 'GET',
             signal: signal,
         })
@@ -29,7 +29,7 @@ userService.list = async (signal) => {
 }
 userService.read = async (params, credentials, signal) => {
     try {
-        let response = await fetch('/api/users/' + params.userId, {
+        let response = await fetch('http://localhost:3001/v1/api/users/' + params.userId, {
             method: 'GET',
             signal: signal,
             headers: {

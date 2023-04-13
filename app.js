@@ -8,6 +8,7 @@ const {mongoose} = require("mongoose");
 const userRoute = require('./routes/user-route');
 const authRoute = require('./routes/auth-route');
 const cors = require("cors");
+const postRoute = require('./routes/post-route');
 
 
 
@@ -43,6 +44,8 @@ db.on("error", console.error.bind(console, "Connection error:"));
 app.use("/v1", authRoute);
 // User Routes
 app.use("/v1", userRoute);
+// Post Route
+app.use("/v1", postRoute);
 
 
 // Handle errors

@@ -5,25 +5,27 @@ import auth from './../helper/auth-helper';
 import userService from '../service/user-service';
 import {Redirect, Link} from 'react-router-dom';
 import DeleteUser from './DeleteUser';
-import { Avatar, 
-    Divider, 
+import { Avatar,
+    Divider,
     IconButton,
-    List, 
-    ListItem, 
-    ListItemAvatar, 
-    ListItemSecondaryAction, 
-    ListItemText, 
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemSecondaryAction,
+    ListItemText,
     Paper, Typography } from '@mui/material';
 
 
 
 const userStyles = makeStyles({
-    root: theme.mixins.gutters({
-        maxWidth: 600,
-        margin: 'auto',
-        padding: theme.spacing(3),
-        marginTop: theme.spacing(5)
-      }),
+    root: {
+        ...theme.mixins.gutters({
+            maxWidth: 600,
+            margin: 'auto',
+            padding: theme.spacing(3),
+            marginTop: theme.spacing(5)
+        }),
+    },
       title: {
         marginTop: theme.spacing(3),
         color: theme.palette.protectedTitle
@@ -34,13 +36,13 @@ export default function Profile({match}) {
     const classes = userStyles();
     const [user, setUser] = useState({});
     const [redirectToSignIn, setRedirectToSignIn] = useState(false);
-    
+
 
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
         const jwt = auth.isAuthenticated();
-    
+
         userService.read({
             userId: match.params.userId
           }, {t: jwt.token}, signal).then((data) => {
@@ -50,7 +52,7 @@ export default function Profile({match}) {
               setUser(data)
             }
           })
-    
+
         return function cleanup(){
           abortController.abort()
         }
@@ -68,7 +70,7 @@ export default function Profile({match}) {
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar>
-                            
+
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={user.name} secondary={user.email}/>
@@ -77,7 +79,7 @@ export default function Profile({match}) {
                             <ListItemSecondaryAction>
                                 <Link to={"/usr/edit/" + user._id}>
                                     <IconButton arial-label="Edit" color="primary">
-                                        
+
                                     </IconButton>
                                 </Link>
                                 <DeleteUser userId={user._id}/>
