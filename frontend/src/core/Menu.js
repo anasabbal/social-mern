@@ -19,12 +19,15 @@ const isActive = (pathname, path) => {
     return (
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" color="inherit">
+          <Typography 
+              variant="h6" 
+              color="inherit">
             MERN Skeleton
           </Typography>
           <Link to="/">
-            <IconButton aria-label="Home" style={isActive(pathname, "/")}>
-              
+            <IconButton 
+                aria-label="Home" 
+                style={isActive(pathname, "/")}>
             </IconButton>
           </Link>
 
@@ -32,17 +35,26 @@ const isActive = (pathname, path) => {
 
             <span>
               <Link to="/register">
-                <Button style={isActive(pathname, "/register")}>Sign up</Button>
+                <Button 
+                    style={isActive(pathname, "/register")}>
+                      Sign up
+                </Button>
               </Link>
               <Link to="/login">
-                <Button style={isActive(pathname, "/login")}>Sign In</Button>
+                <Button 
+                    style={isActive(pathname, "/login")}>
+                      Sign In
+                </Button>
               </Link>
             </span>
           )}
           {
             auth.isAuthenticated() && (<span>
                 <Link to={"/user/" + auth.isAuthenticated().user._id}>
-                    <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
+                    <Button 
+                        style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>
+                          My Profile
+                    </Button>
                 </Link>
                 <Button color="inherit" onClick={() => {
                     auth.clearJWT(() => history.push('/'))

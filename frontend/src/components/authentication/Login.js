@@ -84,16 +84,40 @@ export default function Login(props){
                     <Typography>
                         Login
                     </Typography>
-                    <TextField name="email" label="Email" type="email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/> <br/>
-                    <TextField name="password" label="Password" type="password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/><br/>
+                    <TextField 
+                        name="email" 
+                        label="Email" 
+                        type="email" 
+                        className={classes.textField} 
+                        value={values.email} 
+                        onChange={handleChange('email')} 
+                        margin="normal"/> <br/>
+                    <TextField 
+                        name="password" 
+                        label="Password" 
+                        type="password" 
+                        className={classes.textField} 
+                        value={values.password} 
+                        onChange={handleChange('password')} 
+                        margin="normal"/><br/>
                     {
                         values.error && (<Typography component="p" color="error">
-                        <Icon color="error" className={classes.error}>error</Icon>
+                        <Icon 
+                          color="error" 
+                          className={classes.error}>
+                            error
+                        </Icon>
                     </Typography>)
                     }
                 </CardContent>
                 <CardActions>
-                    <Button color="primary" variant="container" onClick={clickLogin} className={classes.submit}>Login</Button>
+                    <Button 
+                        color="primary" 
+                        variant="container" 
+                        onClick={clickLogin} 
+                        className={classes.submit}>
+                          Login
+                    </Button>
                 </CardActions>
             </Card>
         </div>
