@@ -32,6 +32,24 @@ postController.create = async (req, res, next) => {
         }
     })
 }
+postController.postById = async (req, res, next, id) => {
+    try{
+        let post = await Post.findById(id).populate('postedBy', '_id name').exec();
+        if(!post){
+            return res.status(400).json({
+                error: "Post Not Found"
+            });
+        }
+        req.post = post;
+        next()
+    }catch(err){
+        return res.status(400).json({
+            eroor: "Cound not retrieve use post"
+        });
+    }
+}
+
+
 
 
 module.exports = postController;

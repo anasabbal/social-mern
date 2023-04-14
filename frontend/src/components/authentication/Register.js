@@ -11,8 +11,8 @@ import {
     TextField,
     Typography,Icon
 } from '@mui/material';
-import userService from "../service/user-service";
-import theme from '../theme';
+import userService from "./../../service/user-service";
+import theme from '../../theme';
 import {Link} from 'react-router-dom';
 
 

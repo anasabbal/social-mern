@@ -1,11 +1,12 @@
 import {Route, Switch} from 'react-router-dom';
 import Menu from "./core/Menu";
 import Home from "./pages/Home";
-import Register from "./components/Register";
-import Login from './components/Login';
-import UserList from './components/UserList';
-import Profile from './components/Profile';
-import EditProfile from './components/EditProfile';
+import Register from "./components/authentication/Register";
+import Login from "./components/authentication/Login";
+import UserList from './components/user/UserList';
+import Profile from './components/user/Profile';
+import EditProfile from './components/user/EditProfile';
+import PrivateRoute from './auth/PrivateRoute';
 
 
 const MainRoute = () => {
@@ -18,7 +19,7 @@ const MainRoute = () => {
                 <Route path='/login' component={Login}/>
                 <Route path='/users' component={UserList}/>
                 <Route path='/user/:userId' component={Profile}/>
-                <Route path='/user/edit/:userId' component={EditProfile}/>
+                <PrivateRoute path='/user/edit/:userId' component={EditProfile}/>
             </Switch>
         </div>
     )

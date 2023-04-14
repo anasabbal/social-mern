@@ -30,9 +30,9 @@ userService.list = async (signal) => {
 }
 userService.read = async (params, credentials, signal) => {
     try {
+        console.log("Params User Id: ",params.userId)
         let response = await fetch('http://localhost:3001/v1/api/users/' + params.userId, {
             method: 'GET',
-            signal: signal,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

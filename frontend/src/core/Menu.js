@@ -47,9 +47,15 @@ const isActive = (pathname, path) => {
                 <Button color="inherit" onClick={() => {
                     auth.clearJWT(() => history.push('/'))
                     }}>Sign out</Button>
-                </span>
-        )
-      }
+                </span>)
+          }
+          {
+            auth.isAuthenticated() && (<span>
+                <Link to={"/user/edit/" + auth.isAuthenticated().user._id}>
+                    <Button style={isActive(history, "/user/edit" + auth.isAuthenticated().user._id)}>Edit</Button>
+                </Link>
+                </span>)
+          }
         </Toolbar>
       </AppBar>
     );

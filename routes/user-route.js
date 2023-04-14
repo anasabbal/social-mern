@@ -6,8 +6,11 @@ const expressJwt = require('express-jwt');
 
 const router = express.Router();
 
-
-
+const checkAuthorized = expressJwt.expressjwt({
+    secret: "nkvjefaNJVDSJ",
+    userProperty: 'auth',
+    algorithms: ["HS256"]
+});
 
 router.route('/api/users')
     .get(userController.list)
@@ -15,23 +18,11 @@ router.route('/api/users')
 
 router.route('/api/users/:userId')
     // GET
-    .get(expressJwt.expressjwt({
-        secret: "nkvjefaNJVDSJ",
-        userProperty: 'auth',
-        algorithms: ["HS256"]
-    }), userController.read)
+    .get(checkAuthorized, userController.read)
     // UPDATE
-    .put(expressJwt.expressjwt({
-        secret: "nkvjefaNJVDSJ",
-        userProperty: 'auth',
-        algorithms: ["HS256"]
-    }), authController.hasAuthorization, userController.updateUserById)
-    //
-    .delete(expressJwt.expressjwt({
-        secret: "nkvjefaNJVDSJ",
-        userProperty: 'auth',
-        algorithms: ["HS256"]
-    }), authController.hasAuthorization, userController.deleteUser)
+    .put(checkAuthorized, authController.hasAuthorization ,userController.updateUserById)
+    // DELETE
+    .delete(checkAuthorized, authController.hasAuthorization, userController.deleteUser)
 
 router.param('userId', userController.getUserById);
 

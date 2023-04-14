@@ -1,8 +1,8 @@
 import { makeStyles} from '@mui/styles';
 import {useEffect, useState} from 'react';
-import theme from '../theme';
-import auth from './../helper/auth-helper';
-import userService from '../service/user-service';
+import theme from '../../theme';
+import auth from './../../helper/auth-helper';
+import userService from "./../../service/user-service";
 import {Redirect, Link} from 'react-router-dom';
 import DeleteUser from './DeleteUser';
 import { Avatar,
@@ -47,7 +47,6 @@ export default function Profile({match}) {
             if (data && data.error) {
                 setRedirectToSignIn(true)
             } else {
-                console.log(data);
                 setUser(data);
             }
           })

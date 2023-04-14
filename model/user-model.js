@@ -30,6 +30,16 @@ const UserModel = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+    /*about: {
+        type: String,
+        trim: true
+    },
+    photo: {
+        data: Buffer,
+        contentTyp: String
+    },
+    following: [{type:  mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]*/
 });
 
 UserModel.virtual('password')

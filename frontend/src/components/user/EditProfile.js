@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { makeStyles} from '@mui/styles';
-import theme from '../theme';
-import auth from './../helper/auth-helper';
-import userService from "../service/user-service";
+import theme from '../../theme';
+import auth from './../../helper/auth-helper';
+import userService from "./../../service/user-service";
 import { Card, CardActions, CardContent, TextField,
     Button, Typography, Icon} from '@mui/material';
-
-
 
 
 const useStyles = makeStyles({
@@ -37,7 +35,6 @@ const useStyles = makeStyles({
 
 export default function EditProfile({match}){
     const classes = useStyles();
-
     const [values, setValues] = useState({
         name: '',
         password: '',
@@ -53,18 +50,16 @@ export default function EditProfile({match}){
 
         userService.read({userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
             if (data && data.error) {
-                console.log(data);
-                console.log(data.error);
                 setValues({...values, error: data.error})
             } else {
-                console.log(data);
                 setValues({...values, name: data.name, email: data.email})
             }
         })
+        console.log(values);
         return function cleanup(){
             abortController.abort()
         }
-    }, [match.patams.userId]);
+    }, [match.params.userId]);
 
     const clickSubmit = () => {
         const jwt = auth.isAuthenticated();
@@ -81,7 +76,6 @@ export default function EditProfile({match}){
             if (data && data.error) {
               setValues({...values, error: data.error});
             } else {
-                console.log(data);
                 setValues({...values, userId: data._id, redirectToProfile: true});
             }
           })

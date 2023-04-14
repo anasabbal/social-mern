@@ -1,6 +1,7 @@
 const User = require("../model/user-model");
 const {getErrorMessage} = require("../helper/error-handler");
-const {extend} = require('lodash/extend');
+const extend = require('lodash/extend');
+
 
 
 const create_user = async (req, res) => {
@@ -18,6 +19,8 @@ const create_user = async (req, res) => {
     }
 }
 const read = (req, res) => {
+    console.log("Request Profile");
+    console.log(req.profile)
     req.profile.hashed_password = undefined
     req.profile.salt = undefined
     return res.json(req.profile)
@@ -27,6 +30,7 @@ const list = async(req, res) => {
         let users = await User.find().select('name email updated created');
         res.json(users);
     }catch (err){
+        console.log(err);
         return res.status(400).json({
             error : getErrorMessage(err)
         });
@@ -70,6 +74,66 @@ const deleteUser = async (req, res) => {
         deletedUser.salt = undefined;
         res.json(deletedUser);
     }catch (err){
+        console.log(err);
+        return res.status(400).json({
+            error: getErrorMessage(err)
+        });
+    }
+}
+const photo = async (req, res, next) => {
+    if(req.profile.phot.data){
+        res.set("Content-Type", req.profile.photo.contentType);
+        return res.send(req.profile.photo.data);
+    }
+    next()
+}
+const defaultPhoto = (req, res) => {
+    return res.sendFile(process.cwd());
+}
+const addFollowing = async (req, res, next) => {
+    try{
+        await User.findByIdAndUpdate(
+            req.body.userId,
+            {
+                $push: {following: req.body.followId}
+            }
+        )
+        next()
+    }catch(err){
+        return res.status(400).json({
+            error: getErrorMessage(err)
+        });
+    }
+}
+const addFollower = async (req, res) => {
+    try{
+        let result = await User.findByIdAndUpdate(
+            req.body.followId, {
+                $push: {
+                    followers: req.body.userId
+                }
+            }, {new: true})
+            .populate('following', '_id name')
+            .populate('followers', '_id name')
+            .exec();
+            result.hashed_password = undefined;
+            result.alt = undefined;
+            res.json(result);
+    }catch(err){
+        return res.status(400).json({
+            error: getErrorMessage(err)
+        });
+    }
+}
+const removeFollowing = async (req, res, next) => {
+    try{
+        await User.findByIdAndUpdate(
+            req.body.userId, {
+                $pull: {following: req.body.unfollowId}
+            }
+        )
+        next()
+    }catch(err){
         return res.status(400).json({
             error: getErrorMessage(err)
         });
@@ -78,10 +142,15 @@ const deleteUser = async (req, res) => {
 
 
 module.exports = {
+    addFollower,
+    removeFollowing,
+    addFollowing,
     create_user,
     getUserById,
     list,
     updateUserById,
     deleteUser,
-    read
+    read,
+    defaultPhoto,
+    photo
 };

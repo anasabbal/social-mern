@@ -1,14 +1,14 @@
 import { makeStyles} from '@mui/styles';
 import {useState} from "react";
-import theme from '../theme';
+import theme from '../../theme';
 import {Redirect} from 'react-router-dom';
 import { Card, 
     CardContent, 
     TextField, 
     Typography, 
     Icon, CardActions, Button } from "@mui/material";
-import auth from '../helper/auth-helper';
-import authService from '../service/auth-service';
+import auth from './../../helper/auth-helper';
+import authService from './../../service/auth-service';
 
 
 const useStyles = makeStyles({

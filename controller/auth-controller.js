@@ -55,7 +55,13 @@ const logout = (req, res) => {
 }
 
 const hasAuthorization = (req, res, next) => {
-    const authorized = req.profile && req.auth && req.profile._id === req.auth._id
+    console.log("Authorization :");
+    console.log("Request Profile",req.profile);
+    console.log("Request Auth", req.auth);
+    console.log("Request Profile Id ", req.profile._id);
+    console.log("Request Auth Id ", req.auth.id);
+    const authorized = req.profile && req.auth && req.profile._id == req.auth.id;
+    console.log(authorized);
     if (!(authorized)) {
         return res.status(403).json({
             error: "User is not authorized"

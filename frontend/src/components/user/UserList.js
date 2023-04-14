@@ -1,7 +1,7 @@
 import { makeStyles} from '@mui/styles';
-import theme from '../theme';
 import {useState, useEffect} from 'react';
-import userService from "../service/user-service";
+import theme from '../../theme';
+import userService from "./../../service/user-service";
 import { Avatar, 
     List, 
     ListItem, 

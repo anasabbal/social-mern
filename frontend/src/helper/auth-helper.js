@@ -1,5 +1,3 @@
-import authService from "../service/auth-service";
-
 const auth = {
     isAuthenticated() {
         if (typeof window == "undefined")
