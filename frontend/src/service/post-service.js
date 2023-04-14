@@ -1,6 +1,6 @@
+const postService = {};
 
-
-const create = async (params, credentials, post) => {
+postService.create = async (params, credentials, post) => {
     try{
         let response = await fetch('http://localhost:3001/v1/api/post' + params.userId, {
             method: 'POST',
@@ -16,6 +16,4 @@ const create = async (params, credentials, post) => {
     }
 }
 
-export {
-    create
-};
+export default postService;

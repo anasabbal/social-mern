@@ -7,6 +7,7 @@ import { Card, CardActions, CardContent, TextField,
     Button, Typography, Icon} from '@mui/material';
 
 
+
 const useStyles = makeStyles({
     card: {
       maxWidth: 600,
@@ -48,14 +49,15 @@ export default function EditProfile({match}){
         const signal = abortController.signal;
         const jwt = auth.isAuthenticated();
 
-        userService.read({userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
+        userService.read({
+          userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
             if (data && data.error) {
                 setValues({...values, error: data.error})
             } else {
                 setValues({...values, name: data.name, email: data.email})
+                console.log(values);
             }
         })
-        console.log(values);
         return function cleanup(){
             abortController.abort()
         }
@@ -92,7 +94,7 @@ export default function EditProfile({match}){
                 </Typography>
                 <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
                 <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
-                <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
+                <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal" required={true}/>
                 <br/> {
                     values.error && (<Typography component="p" color="error">
                     <Icon color="error" className={classes.error}>error</Icon>
@@ -101,7 +103,7 @@ export default function EditProfile({match}){
                 }
             </CardContent>
             <CardActions>
-                <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
+              <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
             </CardActions>
         </Card>
     );

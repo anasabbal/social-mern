@@ -5,6 +5,9 @@ import auth from './../../helper/auth-helper';
 import userService from "./../../service/user-service";
 import {Redirect, Link} from 'react-router-dom';
 import DeleteUser from './DeleteUser';
+import {Person, Edit} from '@mui/icons-material';
+
+
 import { Avatar,
     Divider,
     IconButton,
@@ -68,16 +71,16 @@ export default function Profile({match}) {
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar>
-
+                            <Person/>
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={user.name} secondary={user.email}/>
                     {
                         auth.isAuthenticated().user && auth.isAuthenticated().user._id === user._id && (
                             <ListItemSecondaryAction>
-                                <Link to={"/usr/edit/" + user._id}>
+                                <Link to={"/user/edit/" + user._id}>
                                     <IconButton arial-label="Edit" color="primary">
-
+                                        <Edit/>
                                     </IconButton>
                                 </Link>
                                 <DeleteUser userId={user._id}/>

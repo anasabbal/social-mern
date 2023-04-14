@@ -18,8 +18,8 @@ const MainRoute = () => {
                 <Route path="/register" component={Register}/>
                 <Route path='/login' component={Login}/>
                 <Route path='/users' component={UserList}/>
-                <Route path='/user/:userId' component={Profile}/>
-                <PrivateRoute path='/user/edit/:userId' component={EditProfile}/>
+                <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
+                <Route path="/user/:userId" component={Profile}/>
             </Switch>
         </div>
     )

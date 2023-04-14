@@ -7,6 +7,8 @@ const {getErrorMessage} = require("../helper/error-handler");
 
 const postController = {};
 
+
+// Create Post
 postController.create = async (req, res, next) => {
     let form = new formidable.IncomingForm();
 
@@ -32,6 +34,8 @@ postController.create = async (req, res, next) => {
         }
     })
 }
+
+// Get By Id
 postController.postById = async (req, res, next, id) => {
     try{
         let post = await Post.findById(id).populate('postedBy', '_id name').exec();
@@ -49,6 +53,57 @@ postController.postById = async (req, res, next, id) => {
     }
 }
 
+// List By User
+postContrller.listByUser = async (req, res) => {
+    try{
+        let posts = await Post.find({postedBy: req.profile._id})
+            .populate('comments.postedBy', '_id name')
+            .populate('postedBy', '_id name')
+            .sort('-created')
+            .exec();
+        res.json(posts);
+    }catch(err){
+        return res.status(400).json({
+            error: getErrorMessage(err)
+        });
+    }
+}
+
+// List
+postContrller.listNewsFeed = async (req, res) => {
+    let following = req.profile.following;
+    following.push(req.req.profile._id);
+    try{
+        let posts = await Post.find({postedBy: { $in : req.profile.following } })
+                          .populate('comments.postedBy', '_id name')
+                          .populate('postedBy', '_id name')
+                          .sort('-created')
+                          .exec()
+        res.json(posts);
+    }catch(err){
+        return res.status(400).json({
+            erro: getErrorMessage(err)
+        });
+    }
+}
+// Reome
+postContrller.remove = async (req, res) => {
+    let post = req.post;
+    try{
+        let deletedPost = await post.remove();
+        res.json(deletedPost);
+    }catch(err){
+        return res.status(400).json({
+            error: getErrorMessage(err)
+        });
+    }
+}
+
+// Photo
+postContrller.photo = async (req, res, next) => {
+    res.set("Content-Type", req.body.photo.contentType);
+    return res.send(req.post.photo.data);
+}
 
 
 
