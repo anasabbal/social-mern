@@ -32,9 +32,9 @@ const useStyles = makeStyles({
 export default function FollowGrid(props){
     const classes = useStyles();
     return (<div className={classes.root}>
-      <ImageList >
+      <ImageList rowHeight={164} className={classes.gridList} cols={4}>
         {props.people.map((person, i) => {
-           return  <ImageListItem >
+           return  <ImageListItem key={i}>
               <Link to={"/user/" + person._id}>
                 <Avatar src={'/api/users/photo/'+person._id} className={classes.bigAvatar}/>
                 <Typography className={classes.tileText}>{person.name}</Typography>
@@ -44,6 +44,7 @@ export default function FollowGrid(props){
       </ImageList>
     </div>)
 }
+
 FollowGrid.propTypes = {
-    people: PropTypes.array.isRequired
+  people: PropTypes.array.isRequired
 }

@@ -9,7 +9,7 @@ const create_user = async (req, res) => {
 
     try {
         await user.save();
-        return res.status(200).json({
+        return res.status(201).json({
             message: "Successfully signed up !"
         });
     }catch (err){
