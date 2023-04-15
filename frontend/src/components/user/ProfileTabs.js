@@ -1,14 +1,15 @@
 import { useState } from "react";
 import PostList from "../post/PostList";
-import { AppBar, Tab, Typography, Tabs } from "@mui/material";
-import PropTypes from 'prop-types'
+import { AppBar, Tab, Typography } from "@mui/material";
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
 import FollowGrid from "./FollowGrid";
 
 
 
 
-export default function ProfileTabs(props) {
-    const [tab, setTab] = useState(0)
+export default function ProfileTabs ( props ){
+  const [tab, setTab] = useState(0)
 
   const handleTabChange = (event, value) => {
     setTab(value)

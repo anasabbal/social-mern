@@ -83,7 +83,7 @@ userService.remove = async (params, credentials) => {
 }
 userService.follow = async (params, credentials, followId) => {
     try{
-        let respone = await fetch('http://localhost:3001/v1/api/users/follow', {
+        let respone = await fetch('http://localhost:3001/v1/api/users/follow/', {
             method: 'PUT',
             headers:{
                 'Accept': 'application/json',
@@ -99,7 +99,7 @@ userService.follow = async (params, credentials, followId) => {
 }
 userService.unfollow = async (params, credentials, unfollowId) => {
     try{
-        let response = await fetch('http://localhost:3001/v1/api/users/unfollow', {
+        let response = await fetch('http://localhost:3001/v1/api/users/unfollow/', {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

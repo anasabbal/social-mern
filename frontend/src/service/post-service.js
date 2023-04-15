@@ -2,7 +2,7 @@ const postService = {};
 
 postService.create = async (params, credentials, post) => {
     try{
-        let response = await fetch('http://localhost:3001/v1/api/post' + params.userId, {
+        let response = await fetch('http://localhost:3001/v1/api/post/' + params.userId, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -17,7 +17,7 @@ postService.create = async (params, credentials, post) => {
 }
 postService.listByUser = async (params, credentials) => {
     try{
-        let response = await fetch('http://localhost:3001/v1/api/post/by' + params.userId, {
+        let response = await fetch('http://localhost:3001/v1/api/post/by/' + params.userId, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

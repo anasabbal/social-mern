@@ -99,6 +99,7 @@ export default function Profile({match}) {
             if(data.error){
                 setValues({...values, error: data.error});
             }else{
+                console.log(data);
                 setValues({...values, user: data, following: !values.following});
             }
         })

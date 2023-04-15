@@ -92,38 +92,34 @@ const defaultPhoto = (req, res) => {
 }
 const addFollowing = async (req, res, next) => {
     try{
-        await User.findByIdAndUpdate(
-            req.body.userId,
-            {
-                $push: {following: req.body.followId}
-            }
-        )
+        console.log("Request body: ", req.body);
+        console.log("Follow Id: ", req.body.followId)
+        await User.findByIdAndUpdate(req.body.userId, {$push: {following: req.body.followId}}) 
         next()
     }catch(err){
         return res.status(400).json({
-            error: getErrorMessage(err)
-        });
+            error: errorHandler.getErrorMessage(err)
+        })
     }
 }
+  
 const addFollower = async (req, res) => {
     try{
-        let result = await User.findByIdAndUpdate(
-            req.body.followId, {
-                $push: {
-                    followers: req.body.userId
-                }
-            }, {new: true})
-            .populate('following', '_id name')
-            .populate('followers', '_id name')
-            .exec();
-            result.hashed_password = undefined;
-            result.alt = undefined;
-            res.json(result);
-    }catch(err){
+        console.log("Request body: ", req.body);
+        console.log("Follow Id: ", req.body.followId)
+        let result = await User.findByIdAndUpdate(req.body.followId, {$push: {followers: req.body.userId}}, {new: true})
+                              .populate('following', '_id name')
+                              .populate('followers', '_id name')
+                              .exec();
+        console.log("Resutlt: ", result);
+        result.hashed_password = undefined
+        result.salt = undefined
+        res.json(result)
+      }catch(err) {
         return res.status(400).json({
-            error: getErrorMessage(err)
-        });
-    }
+          error: errorHandler.getErrorMessage(err)
+        })
+      }  
 }
 const removeFollowing = async (req, res, next) => {
     try{

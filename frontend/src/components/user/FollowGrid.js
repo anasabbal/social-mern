@@ -8,12 +8,11 @@ import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
-    paddingTop: theme.spacing(2),
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    background: theme.palette.background.paper,
+    background: theme.palette.background.paper
   },
   bigAvatar: {
     width: 60,
@@ -33,9 +32,9 @@ const useStyles = makeStyles({
 export default function FollowGrid(props){
     const classes = useStyles();
     return (<div className={classes.root}>
-      <ImageList rowHeight={160} className={classes.gridList} cols={4}>
+      <ImageList >
         {props.people.map((person, i) => {
-           return  <ImageListItem style={{'height':120}} key={i}>
+           return  <ImageListItem >
               <Link to={"/user/" + person._id}>
                 <Avatar src={'/api/users/photo/'+person._id} className={classes.bigAvatar}/>
                 <Typography className={classes.tileText}>{person.name}</Typography>

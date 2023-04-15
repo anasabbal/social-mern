@@ -1,6 +1,19 @@
 const express = require("express");
-const userController = require('../controller/user-controller');
-const authController = require("../controller/auth-controller");
+const { 
+    addFollower,
+    removeFollowing,
+    addFollowing,
+    create_user,
+    getUserById,
+    list,
+    updateUserById,
+    deleteUser,
+    read,
+    defaultPhoto,
+    photo,
+    removeFollower
+} = require('../controller/user-controller');
+const {register, logout, hasAuthorization} = require("../controller/auth-controller");
 const expressJwt = require('express-jwt');
 
 
@@ -13,25 +26,25 @@ const checkAuthorized = expressJwt.expressjwt({
 });
 
 router.route('/api/users')
-    .get(userController.list)
-    .post(userController.create_user)
+    .get(list)
+    .post(create_user)
 
 // User Route
 router.route('/api/users/:userId')
     // GET
-    .get(checkAuthorized, userController.read)
+    .get(checkAuthorized, read)
     // UPDATE
-    .put(checkAuthorized, authController.hasAuthorization ,userController.updateUserById)
+    .put(checkAuthorized, hasAuthorization ,updateUserById)
     // DELETE
-    .delete(checkAuthorized, authController.hasAuthorization, userController.deleteUser)
+    .delete(checkAuthorized, hasAuthorization, deleteUser)
 
 // Posts
 router.route('/api/users/follow')
-    .put(checkAuthorized, userController.addFollowing, userController.addFollower)
+    .put(checkAuthorized, addFollowing, addFollower)
 router.route('/api/users/unfollow')
-    .put(checkAuthorized, userController.removeFollowing, userController.removeFollower)
+    .put(checkAuthorized, removeFollowing, removeFollower)
 
-router.param('userId', userController.getUserById);
+router.param('userId', getUserById);
 
 
 module.exports = router;
