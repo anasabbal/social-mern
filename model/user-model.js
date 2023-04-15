@@ -29,8 +29,8 @@ const UserModel = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now
-    }
-    /*about: {
+    },
+    about: {
         type: String,
         trim: true
     },
@@ -39,7 +39,7 @@ const UserModel = new mongoose.Schema({
         contentTyp: String
     },
     following: [{type:  mongoose.Schema.Types.ObjectId, ref: 'User'}],
-    followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]*/
+    followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 });
 
 UserModel.virtual('password')

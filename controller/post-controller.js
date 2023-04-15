@@ -54,7 +54,7 @@ postController.postById = async (req, res, next, id) => {
 }
 
 // List By User
-postContrller.listByUser = async (req, res) => {
+postController.listByUser = async (req, res) => {
     try{
         let posts = await Post.find({postedBy: req.profile._id})
             .populate('comments.postedBy', '_id name')
@@ -70,7 +70,7 @@ postContrller.listByUser = async (req, res) => {
 }
 
 // List
-postContrller.listNewsFeed = async (req, res) => {
+postController.listNewsFeed = async (req, res) => {
     let following = req.profile.following;
     following.push(req.req.profile._id);
     try{
@@ -87,7 +87,7 @@ postContrller.listNewsFeed = async (req, res) => {
     }
 }
 // Reome
-postContrller.remove = async (req, res) => {
+postController.remove = async (req, res) => {
     let post = req.post;
     try{
         let deletedPost = await post.remove();
@@ -100,7 +100,7 @@ postContrller.remove = async (req, res) => {
 }
 
 // Photo
-postContrller.photo = async (req, res, next) => {
+postController.photo = async (req, res, next) => {
     res.set("Content-Type", req.body.photo.contentType);
     return res.send(req.post.photo.data);
 }

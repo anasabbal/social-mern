@@ -4,6 +4,7 @@ import theme from '../../theme';
 import { makeStyles} from '@mui/styles';
 import postService from "./../../service/post-service";
 import PropsTypes from 'prop-types';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Icon, IconButton, TextField, Typography } from "@mui/material";
 
 
 const useStyles = makeStyles({
@@ -81,8 +82,42 @@ export default function AddPost(props){
         const value = name === 'photo' ? event.target.files[0] : event.target.value;
         setValues({...values, [name]: value});
     }
+    const photoURL = values.user._id ? '/api/users/photo/' + values.user._id:'/api/users/defaultphoto';
     return (
-        <div></div>
+        <div className={classes.cart}>
+          <Card className={classes.card}>
+            <CardHeader
+                avatar={<Avatar src={photoURL}/>}
+                title={values.user.name}
+                className={classes.cardHeader}>
+            </CardHeader>
+            <CardContent className={classes.cardContent}>
+              <TextField
+                  placeholder="Share your thoughts ..."
+                  multiline rows="3"
+                  value={values.text}
+                  onChange={handleChange('text')}
+                  className={classes.textField}
+                  margin="normal"
+              />
+              <input accept="image/*" onChange={handleChange('photo')} className={classes.input} id="icon-button-file" type="file" />
+              <label htmlFor="icon-button-file"> 
+                  <IconButton color="secondary" className={classes.photoButton} component="span">
+                    
+                  </IconButton>
+              </label> <span className={classes.filename}>{values.photo ? values.photo.name : ''}</span>
+              {
+                values.error && (<Typography component="p" color="error">
+                  <Icon color="error" className={classes.error}>error</Icon>
+                  {values.error}
+                </Typography>)
+              }
+            </CardContent>
+            <CardActions>
+              <Button color="primary" variant="contained" disabled={values.text === ''} onClick={clickPost} className={classes.submit}>POST</Button>
+            </CardActions>
+          </Card>
+        </div>
     )
 }
 
